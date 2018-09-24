@@ -1,6 +1,8 @@
 # get-azure-latest-invoice
 
-Shows how to get the most recent Azure invoice
+A sample PowerShell script that shows how to get the most recent Azure invoice.
+
+Azure Billing API を利用し、最新の請求書をダウンロードしてくる PowerShell スクリプトです。
 
 ## 請求書へのアクセスの許可
 
@@ -54,7 +56,7 @@ $subscription = "0123ABCD-4567-89EF-0123-ABCD4567EF89"
 内部的には以下のような Azure Billing API にアクセスしています。
 
 ```
-GET https://management.azure.com/subscriptions/{subscription id}/providers/Microsoft.Billing/invoices/latest?api-version=2017-04-24-prevGET 
+GET https://management.azure.com/subscriptions/{subscription id}/providers/Microsoft.Billing/invoices/latest?api-version=2017-04-24-prev  
 Authorization: Bearer eyJ0eXAiOi{省略}3lISmxZIn0.eyJhdWQiOi{省略}joiMS4wIn0.FDlzA1xpic{省略}Nj_6yECdIw
 ```
 
@@ -73,10 +75,10 @@ Authorization: Bearer eyJ0eXAiOi{省略}3lISmxZIn0.eyJhdWQiOi{省略}joiMS4wIn0.
         "invoicePeriodEndDate": "2018-08-12",
         "invoicePeriodStartDate": "2018-07-13",
         "billingPeriodIds": [
-            "/subscriptions/{subscription id}/providers/Microsoft.Billing/billingPeriods/201810-1"
+            "/subscriptions/{subscription id}/providers/Microsoft.Billing/billingPeriods/{period id}"
         ]
     }
 }
 ```
 
-スクリプトでは、url から取得したデータをinvoicePeriodStartDate と invoicePeriodEndDate の値を組み合わせたファイル名にして保存しています。
+スクリプトでは、url から取得したデータを invoicePeriodStartDate と invoicePeriodEndDate の値を組み合わせたファイル名にして保存しています。
